@@ -6,6 +6,9 @@ The dataset is provided as a single SQLite3 database, and can be found at https:
 
 - The code for the score prediction results and the $\chi^2$ analyses are in the
   folder `score_prediction_and_chi2_analysis`.
+- The code for the CLC detection baseline is in the `CLC` folder.
+- The code for the DA/AP classification tasks as well as the LLaMA-3 baselines
+  for sentiment/emotion classification is in the `DA` folder.
 - The code for the other baseline results will be added soon.
 - Additional documentation for the database will be added soon.
 
