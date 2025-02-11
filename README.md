@@ -12,8 +12,6 @@ The dataset is provided as a single SQLite3 database, and can be found at https:
 - The code for the other baseline results will be added soon.
 - Additional documentation for the database will be added soon.
 
-Please
-
 ## License
 
 The code and data are licensed under the Creative Commons CC-BY-4.0 license
