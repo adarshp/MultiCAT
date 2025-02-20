@@ -23,6 +23,7 @@ Dependencies and Requirements
 4. LDC corpus and metadata files <br>(for ToMCAT users, a small sample of the corpus is available at `kraken.sista.arizona.edu:/media/mule/projects/ldc`)
 
 Note: while working with OpenSMILE, remember to add the path to $PATH: `export PATH=$PATH:<path to opensmile dir>/opensmile/build/progsrc/smilextract`
+
 ------------------------
 Summary of directories and files
 --------------------------------
