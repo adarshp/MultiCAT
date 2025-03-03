@@ -14,7 +14,7 @@ def make_argument_parser():
 						default="./multicat_addressee_feats",
 						help="directory for opensmile feat files (csv)")
 	parser.add_argument("--h5_directory",
-						default="./h5_output",
+						default="./multicat_h5_output",
 						help="directory for storing h5 files")
 	return parser
 

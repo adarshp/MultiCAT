@@ -1,4 +1,24 @@
 import os
+import sys
+from pathlib import Path
+import numpy as np
+import random
+import argparse
+import h5py
+import torch
+import pdb
+
+def make_argument_parser():
+	parser = argparse.ArgumentParser(
+		description="Processing filepaths and values required for setup")
+	parser.add_argument("--h5_file",
+						default="./multicat_h5_output/test_ASIST.h5",
+						help="directory for storing h5 files")
+	parser.add_argument("--model",
+						default="../fisher_scripts/models/trained_VAE_nonorm_nopre_l1.pt",
+						help="directory where the Fisher model is")
+	return parser
+
 ############ Fix for issues with paths #######
 ## Get the current working directory
 current_directory = os.getcwd()
@@ -7,19 +27,8 @@ parent_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
 # Add the parent directory to the system path
 sys.path.append(parent_dir)
 ############ 
-
-import argparse
-import numpy as np
-import random
-from feats.ecdc import *
-
-def make_argument_parser():
-	parser = argparse.ArgumentParser(
-		description="Processing filepaths and values required for setup")
-	parser.add_argument("--h5_directory",
-						default="./asist3_h5",
-						help="directory for storing h5 files")
-	return parser
+print(sys.path)
+from ecdc import *
 
 
 def load_h5(file):
@@ -59,6 +68,7 @@ def model_testing(model_name, X_test, cuda):
 		# speaker- last item in list. Create a variable where the utterances
 		# with the same speaker as the first utterance
 		idx_same_spk =list(np.where(X_test[:,-1]==data[-1]))[0]
+		print(f"idx_same_spk: {idx_same_spk}, idx: {idx}")
 
 		# choose an item from the index same speaker which is not the same speaker
 		ll = random.choice(list(set(idx_same_spk) - set([idx])))
@@ -114,8 +124,8 @@ def model_testing(model_name, X_test, cuda):
 	Loss = np.array(Loss)
 	Fake_loss = np.array(Fake_loss)
 
-	print("Total Real Loss: "+ str(test_loss))
-	print("Total Fake Loss: " + str(fake_test_loss))
+	print("Total Real Loss: "+ str(Loss))
+	print("Total Fake Loss: " + str(Fake_loss))
 
 	print(float(np.sum(Loss < Fake_loss))/Loss.shape[0])
 	return None
@@ -124,6 +134,20 @@ if __name__ == "__main__":
 	parser = make_argument_parser()
 	args = parser.parse_args()
 
+	# get input directories:
+	h5_file = args.h5_file
+	model = args.model
+
+	#Check if input h5 and model directories exists, if not, stop:   
+	if not Path(args.h5_file).resolve().exists() or not Path(args.model).resolve().exists():
+		print(f"Could not find specified h5 directory {h5_file} or model {model}. Stop")
+		sys.exit(1)
+	elif Path(args.h5_file).resolve().exists() and Path(args.model).resolve().exists():
+		print("All input files found. Processing...")
+
+	#optional: for testing Fisher test set
 	# test_h5 = args.h5_directory + '/test_Fisher_nonorm.h5'
-	test_h5 = args.h5_directory + '/test_ASIST.h5'
+		
+	test_h5 = args.h5_file
 	test_input = load_h5(test_h5)
+	model_testing(model_name = model, X_test = test_input, cuda = 1)

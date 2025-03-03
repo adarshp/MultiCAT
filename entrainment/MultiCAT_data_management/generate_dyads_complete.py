@@ -34,7 +34,7 @@ sys.path.append(parent_dir)
 OPENSMILE_CONFIG_BASELINE = parent_dir + "/scripts_and_config/emobase2010_haoqi_revised.conf"
 
 # feature extraction function
-from feats.feat_extract_nopre import final_feat_calculate_multicat
+from fisher_scripts.feat_extract_nopre import final_feat_calculate_multicat
 
 def make_argument_parser():
 	parser = argparse.ArgumentParser(
@@ -68,7 +68,7 @@ def loop_through_data(combined_transcript_dict, save_dir):
 		fname = fpath.stem
 		savename = f"{save_dir}/{fname}_feats.csv"
 
-		# row num
+		# current row num
 		row_num = 0
 		# holder for all utt rows in overall feats file
 		all_row_ends = []
@@ -76,40 +76,41 @@ def loop_through_data(combined_transcript_dict, save_dir):
 		# go through the combined file
 		counter = 0
 		for i, row in combined_transcript.iterrows():
-
+			## only proceed till the penultimate utterance
 			if i < len(combined_transcript) - 1:
 				next_row = combined_transcript.iloc[i+1]
-				#ToDo: add else condition?
+				## ToDo: add else condition?
 				if row.speaker == next_row.speaker:
 					print(f"row {i}: {row.speaker}; row {i + 1}: {next_row.speaker}")
 					print("pair of utterances have the same speaker, skipping")
 				elif row.speaker != next_row.speaker:
 					print(f"row {i}: {row.speaker}; row {i + 1}: {next_row.speaker}")
-					#ToDo: change this
-					print(f"extract_me for row {i} is True!")
+					print(f"pair of utterances have different speakers, processing...")
 					counter+=1
-					# extract the relevant components of this row and the following row:
-					# extract for this row
+					## extract the relevant components and a deep copy of this row and the following row:
+					
+					## extract features for this row
 					this_row_feats, this_row_copy = run_opensmile_over_utterance(row, fpath)
-					# extract for following row
+					## extract features for following row
 					next_row_feats, next_row_copy = run_opensmile_over_utterance(next_row, fpath)
-					# add to row num for this utt
+					## add to row num for this utt
 					this_utt_ends = [row_num, row_num + len(this_row_copy)]
+					print(f"this_utt_ends: {this_utt_ends}")
 					row_num += len(this_row_copy)
 
-					# add to row num for next utt
+					## add to row num for next utt
 					next_utt_ends = [row_num, row_num + len(next_row_copy)]
 					row_num += len(next_row_copy)
 
-					# add to counter for all rows
+					## add to counter for all rows
 					all_row_ends.append(this_utt_ends)
 					all_row_ends.append(next_utt_ends)
 
-					# add feature copies to features_for_normalizing
+					## add feature copies to features_for_normalizing
 					features_for_normalizing.extend(this_row_copy)
 					features_for_normalizing.extend(next_row_copy)
 
-					# save these features to holders for later change
+					## save these features to holders for later change
 					all_features_for_this_list.append(this_row_feats)
 					all_features_for_this_list.append(next_row_feats)
 			# break
@@ -152,16 +153,23 @@ def loop_through_data(combined_transcript_dict, save_dir):
 
 
 def run_opensmile_over_utterance(row, base_file):
-	# get start and end times, name of files
+	'''
+	Extracts acoustic features for a given audio file.
+	Needs a row of data containing start and end time, and 
+	speaker name; and a file path.
+	Returns a vector acoustic features and a deep copy of it	
+	'''
+
+	## get start and end times
 	start = row.start
 	end = row.end
 	speaker = row.speaker
 
-	# get the name of the audio
-	# combined files are of format: Trial-T000604_Team-TM000202_combined.txt
+	## get the name of the audio
+	## combined files are of format: Trial-T000604_Team-TM000202_combined.txt
 	filepath = base_file.parent
 	fname = base_file.stem
-	# re.sub(pattern, repl, string, count=0, flags=0)¶
+	## re.sub(pattern, repl, string, count=0, flags=0)¶
 	if "NA" in fname:
 		audio_in_name = re.sub(r"NA", speaker, fname) + ".wav"
 	else:
@@ -172,15 +180,14 @@ def run_opensmile_over_utterance(row, base_file):
 
 	length = end - start
 
-	# extract this short file to run feature extraction on
+	## extract this short file to run feature extraction on
 	sp.run(["ffmpeg", "-y", "-ss", str(start), "-i", f"{str(filepath)}/{audio_in_name}",
 			"-t", str(length), "-c", "copy", "-y", audio_out])
 
 	feats_out = filepath / f"{speaker}_{start}-{end}.csv"
 	feats_out = str(feats_out)
 
-	# run opensmile over a particular utterance
-
+	# run opensmile over a particular utterance, ex:
 	# $(OUTPUT_DIR)/%_features_raw_baseline.csv: $(OUTPUT_DIR)/%.wav
 	# 	SMILExtract -C $(OPENSMILE_CONFIG_BASELINE) -I $< -O $@
 	# extract the features with opensmile
