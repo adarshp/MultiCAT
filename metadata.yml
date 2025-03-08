@@ -1,0 +1,152 @@
+# Metadata for the Datasette instance.
+
+title: The MultiCAT Dataset
+description: Multimodal task-oriented dialog dataset.
+license: CC-BY-4.0
+license_url: https://creativecommons.org/licenses/by/4.0/
+databases:
+    multicat:
+        tables:
+            participant:
+                description: Participant
+                label_column: id
+                columns:
+                    id: Participant ID
+                    team: The ID of the team that the participant was in.
+                    playername: The 'playername' assigned to the participant.
+                    age: Age of the participant
+                    sex: Sex of the participant assigned at birth
+                    ethnicity: Ethnicity of the participant
+                    english_proficiency: English proficiency level
+                    time_in_us: Time that the participant has lived in the US
+                    highest_education_level: Highest education level achieved by the participant.
+                    mc_prof_1: >
+                      To what extent do you consider yourself to be a serious, competitive gamer? 
+                      [Here we define "serious, competitive" as actively training for and participating in competitive gameplay more than a few times a year. Note that competitions may take different
+                            forms depending on which game you play competitively, some may be solo play, some may be teams of players against teams of other players, some may be structured as tournaments,
+                            but any competitive play that results in identifiable winners and involves scheduled and/or regular dedicated training or practice time is appropriate to consider.]
+                    mc_prof_2_1: >
+                      Please rate how confident you are that you can learn and succeed at a new video game or set of game-related skills after minimal practice? - Confidence positivity
+                    mc_prof_3: >
+                      Please indicate which of the following control systems you
+                      prefer to use to play video games.
+                    mc_prof_4_1: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Learning the
+                      layout of a new virtual environment
+                    mc_prof_4_2: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Communicating
+                      your current location in a virtual environment to members
+                      of a team
+                    mc_prof_4_3: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have
+                      over the following skills as compared to other video gamers that you know or have played with. - Coordinating with teammates to optimize tasks
+                    mc_prof_4_4: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have
+                      over the following skills as compared to other video gamers that you know or have played with. - Maintaining an awareness of game/task parameters (e.g., time limits, point goals,
+                      etc)
+                    mc_prof_4_5: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Learning the
+                      purposes of novel items, tools, or objects
+                    mc_prof_4_6: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Remembering
+                      which places you have visited  in a virtual environment
+                    mc_prof_4_7: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Controlling
+                      the movement of an avatar using the W, A, S, and D keys +
+                      mouse control
+                    mc_prof_4_8: >
+                      Succeeding in different types of video games can require
+                      different skill sets and levels of mastery. Please use the
+                      slider bars below to indicate the level of mastery you
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Keeping track
+                      of where you are in a virtual environment
+                    mc_prof_5: Please select which of the following best describes you with respect to your motivations to play video games.
+                    mc_prof_6: Please rate your experience level in playing video games. Please be as honest and objective as possible.
+                    mc_prof_7: Please rate your proficiency level in playing video games. Please be as honest and objective as possible.
+                    mc_prof_8_1: >
+                      For the following, please indicate how regularly you: - Use a computer...
+                    mc_prof_8_2: >
+                      For the following, please indicate how regularly you: - Play any video game...
+                    mc_prof_8_3: >
+                      For the following, please indicate how regularly you: - Use a computer to play video games...
+                    mc_prof_8_4: >
+                      For the following, please indicate how regularly you: - Use a system other than a computer to play video games...
+                    mc_prof_8_5: >
+                      For the following, please indicate how regularly you: - Play video games which require participation in a team...
+                    mc_prof_8_6: >
+                      For the following, please indicate how regularly you: - Play Minecraft...
+                    mc_prof_9_1: >
+                      Please indicate how many years of experience you have with the following: - Years using a computer for any purpose:
+                    mc_prof_9_2: >
+                      Please indicate how many years of experience you have with the following: - Years using a computer to play video games:
+                    mc_prof_9_3: >
+                      Please indicate how many years of experience you have with
+                      the following: - Years using a system other than a computer to play video games
+                      (e.g., mobile phone, gaming console, arcade console):
+                    mc_prof_9_4: >
+                      Please indicate how many years of experience you have with
+                      the following: - Years playing Minecraft (any versions or styles of play):
+
+            team:
+                description: Team
+                label_column: id
+                columns:
+                    id: Team ID
+                    advisor: Advisor
+            trial:
+                description: Trial
+                label_column: id
+                columns:
+                    id: Trial ID
+                    team: Team ID
+            utterance:
+                description: Utterances with their annotations.
+                columns:
+                    original_uuid: >
+                      Original UUID of the ASR utterance. This can be null if
+                      the utterance was manually added by an annotator.
+                    trial: Trial ID
+                    participant: Participant ID
+                    asr_text: ASR transcription
+                    corrected_text: Manually corrected transcription, if the ASR transcription is incorrect.
+                    start_timestamp: Start timestamp
+                    stop_timestamp: Stop timestamp
+                    dialog_acts: Dialog acts identified.
+                    adjacency_pairs: Adjacency pair annotations.
+                    sentiment: >
+                      Sentiment label. Can be null if (i) the trial wasn't
+                      annotated for sent/emo or (ii) if the audio of the
+                      utterance is not clear enough to assign a label.
+                    emotion: >
+                      Emotion label. Can be null if (i) the trial wasn't
+                      annotated for sent/emo or (ii) if the audio of the
+                      utterance is not clear enough to assign a label.
+                    background_noise: >
+                      Annotations describing background noise during an utterance, if any.

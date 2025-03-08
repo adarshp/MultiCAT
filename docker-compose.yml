@@ -1,0 +1,17 @@
+# Docker-compose file for Datasette interface
+version: '3.7'
+
+services:
+
+  datasette:
+    image: datasetteproject/datasette:0.65.1
+    restart: unless-stopped
+    ports:
+        - "8001:8001"
+    volumes:
+        - .:/mnt
+
+    entrypoint: |
+        datasette -p 8001 -h 0.0.0.0 -i /mnt/multicat.db
+        --reload
+        --metadata /mnt/metadata.yml
