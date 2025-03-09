@@ -1,5 +1,4 @@
 # Docker-compose file for Datasette interface
-version: '3.7'
 
 services:
 
