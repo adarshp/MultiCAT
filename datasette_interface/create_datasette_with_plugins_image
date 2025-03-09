@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Script to install plugins into datasette container
+
+docker pull datasetteproject/datasette:0.65.1
+
+docker run datasetteproject/datasette \
+    pip install \
+        datasette-render-markdown \
+        datasette-pretty-json \
+        datasette-copyable
+
+docker commit $(docker ps -lq) datasette-with-plugins
