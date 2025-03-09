@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body_class %}index{% endblock %}
+
+{% block content %}
+{{ render_markdown("""
+# Papers and Systems
+
+This page lists all the papers and systems that use the dataset. This is up to
+date as of 2025-03-09.
+
+- [MultiCAT: Multimodal Communication Annotations for Teams](https://openreview.net/forum?id=nkxpva8fN5) (NAACL 2025 Findings): The original dataset paper, which contains benchmark analyses based on the dataset.
+""") }}
+{% endblock %}

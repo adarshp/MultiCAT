@@ -22,11 +22,20 @@ databases:
                     highest_education_level: Highest education level achieved by the participant.
                     mc_prof_1: >
                       To what extent do you consider yourself to be a serious, competitive gamer? 
-                      [Here we define "serious, competitive" as actively training for and participating in competitive gameplay more than a few times a year. Note that competitions may take different
-                            forms depending on which game you play competitively, some may be solo play, some may be teams of players against teams of other players, some may be structured as tournaments,
-                            but any competitive play that results in identifiable winners and involves scheduled and/or regular dedicated training or practice time is appropriate to consider.]
+                      [Here we define "serious, competitive" as actively
+                      training for and participating in competitive gameplay
+                      more than a few times a year. Note that competitions may
+                      take different forms depending on which game you play
+                      competitively, some may be solo play, some may be teams of
+                      players against teams of other players, some may be
+                      structured as tournaments, but any competitive play that
+                      results in identifiable winners and involves scheduled
+                      and/or regular dedicated training or practice time is
+                      appropriate to consider.]
                     mc_prof_2_1: >
-                      Please rate how confident you are that you can learn and succeed at a new video game or set of game-related skills after minimal practice? - Confidence positivity
+                      Please rate how confident you are that you can learn and
+                      succeed at a new video game or set of game-related skills
+                      after minimal practice? - Confidence positivity
                     mc_prof_3: >
                       Please indicate which of the following control systems you
                       prefer to use to play video games.
@@ -49,14 +58,17 @@ databases:
                       Succeeding in different types of video games can require
                       different skill sets and levels of mastery. Please use the
                       slider bars below to indicate the level of mastery you
-                      have
-                      over the following skills as compared to other video gamers that you know or have played with. - Coordinating with teammates to optimize tasks
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Coordinating
+                      with teammates to optimize tasks
                     mc_prof_4_4: >
                       Succeeding in different types of video games can require
                       different skill sets and levels of mastery. Please use the
                       slider bars below to indicate the level of mastery you
-                      have
-                      over the following skills as compared to other video gamers that you know or have played with. - Maintaining an awareness of game/task parameters (e.g., time limits, point goals,
+                      have over the following skills as compared to other video
+                      gamers that you know or have played with. - Maintaining an
+                      awareness of game/task parameters (e.g., time limits,
+                      point goals,
                       etc)
                     mc_prof_4_5: >
                       Succeeding in different types of video games can require
@@ -87,9 +99,15 @@ databases:
                       have over the following skills as compared to other video
                       gamers that you know or have played with. - Keeping track
                       of where you are in a virtual environment
-                    mc_prof_5: Please select which of the following best describes you with respect to your motivations to play video games.
-                    mc_prof_6: Please rate your experience level in playing video games. Please be as honest and objective as possible.
-                    mc_prof_7: Please rate your proficiency level in playing video games. Please be as honest and objective as possible.
+                    mc_prof_5: >
+                      Please select which of the following best describes you
+                      with respect to your motivations to play video games.
+                    mc_prof_6: >
+                      Please rate your experience level in playing video games.
+                      Please be as honest and objective as possible.
+                    mc_prof_7: >
+                      Please rate your proficiency level in playing video games.
+                      Please be as honest and objective as possible.
                     mc_prof_8_1: >
                       For the following, please indicate how regularly you: - Use a computer...
                     mc_prof_8_2: >
@@ -150,3 +168,24 @@ databases:
                       utterance is not clear enough to assign a label.
                     background_noise: >
                       Annotations describing background noise during an utterance, if any.
+
+# ====================
+# Plugin configuration
+# ====================
+
+plugins:
+  datasette-render-markdown:
+    templates: true
+
+
+# ====================
+# Custom CSS
+# ====================
+extra_css_urls:
+    - /assets/app.css
+    - url: https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css
+      sri: sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM
+
+extra_js_urls:
+    - url: https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js
+      sri: sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz
