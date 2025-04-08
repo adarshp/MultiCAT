@@ -1,54 +1,46 @@
 # incorporates elements from https://github.com/marcovzla/discobert/blob/master/config.py
 import os
-import argparse
-from argparse import Namespace
-import pandas as pd
-import numpy as np
-import time
-import subprocess
-import matplotlib.pyplot as plt
-import pdb
-import glob
-import random
-import h5py
-from torch.utils.data import Dataset
-from torch import nn, optim
-from torch.autograd import Variable
-from torch.nn import functional as F
-import math
-import pprint, pickle
-from sklearn import preprocessing
-from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.preprocessing import normalize
-from scipy import spatial
 
 ### ABSOLUTE FILEPATHS FOR INPUT#####
 
 ## EDIT THE FOLLOWING LINE TO SET THE DIRECTORY FOR THE FISHER CORPUS
-fisher_corpus = "/media/mule/projects/ldc/corpus/" # master directory
+fisher_corpus = "/media/mule/projects/ldc/corpus/"  # master directory
 ##
 
 ###############################
 # Files in the Fisher Directory
 ###############################
 
-transcript_dir = fisher_corpus + "/fe_03_p1_tran/data/trans/all_trans" #directory that hourses all transcript files in one directory (no subdirectories)
-audio_dir_root = fisher_corpus + "/fisher_eng_tr_sp_LDC2004S13_zip" #directory for sphere sound files
-fisher_meta = fisher_corpus + "/Fisher_meta.csv" #metafile, create this before running anything else
+transcript_dir = (
+    fisher_corpus + "/fe_03_p1_tran/data/trans/all_trans"
+)  # directory that hourses all transcript files in one directory (no subdirectories)
+audio_dir_root = (
+    fisher_corpus + "/fisher_eng_tr_sp_LDC2004S13_zip"
+)  # directory for sphere sound files
+fisher_meta = (
+    fisher_corpus + "/Fisher_meta.csv"
+)  # metafile, create this before running anything else
 #
 # 		## Sample files for testing things
-def_wav = fisher_corpus + "/" + audio_dir_root + "/fisher_eng_tr_sp_d1/audio/000/fe_03_00004.sph" #example sound file
-def_audio = fisher_corpus + "/" + audio_dir_root + "/fisher_eng_tr_sp_d1/audio" #audio subdirectory that houses the sphere file subdirectories
+def_wav = (
+    fisher_corpus
+    + "/"
+    + audio_dir_root
+    + "/fisher_eng_tr_sp_d1/audio/000/fe_03_00004.sph"
+)  # example sound file
+def_audio = (
+    fisher_corpus + "/" + audio_dir_root + "/fisher_eng_tr_sp_d1/audio"
+)  # audio subdirectory that houses the sphere file subdirectories
 #
 
 ###############################
 # OUTPUT FILES
 ###############################
 
-feats_dir = fisher_corpus+"/feats"
-data_dir = fisher_corpus+"/feats_nonorm"
-raw_feat_dir = fisher_corpus+"/raw_feats"
-feats_nonorm_nopre = fisher_corpus+"/feats_nonorm_nopre"
+feats_dir = fisher_corpus + "/feats"
+data_dir = fisher_corpus + "/feats_nonorm"
+raw_feat_dir = fisher_corpus + "/raw_feats"
+feats_nonorm_nopre = fisher_corpus + "/feats_nonorm_nopre"
 
 ###############################
 # MODELLING
