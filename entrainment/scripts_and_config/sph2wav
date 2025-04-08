@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# This script converts a .sph file to a .wav file. If the .wav file is not
+# 16KHz, it resamples to 16KHz.
+set -eu
+
+input_sph_file=$1
+output_wav_file=$2
+
+# Convert to .wav file
+sph2pipe -f rif $input_sph_file $output_wav_file
+
+# Check if 16k, else resample
+output_wav_file_frequency=$(sox --i -r $output_wav_file)
+if [ ! $output_wav_file_frequency == 16000 ]; then
+    echo "${output_wav_file} has frequency ${output_wav_file_frequency} Hz, resampling to 16 KHz"
+    resampled_wav_file=${output_wav_file/.wav/_resampled.wav}
+    sox $output_wav_file -b 16 -c 1 -r 16k $resampled_wav_file dither -s
+    mv $resampled_wav_file $output_wav_file
+fi
