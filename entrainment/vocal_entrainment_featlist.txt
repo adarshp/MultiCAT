@@ -1,0 +1,39 @@
+Feature_label    Explanation    Suffix_explanation
+F0final_sma    pitch distribution    _sma- smoothed by a moving average filter with window length 3
+F0final_sma_de    pitch distribution    _sma- smoothed by a moving average filter with window length 3, _de- 1st order delta coefficient
+pcm_loudness_sma    loudness as the normalised intensity raised to a power of 0.3    _sma- smoothed by a moving average filter with window length 3, _de- 1st order delta coefficient
+pcm_loudness_sma_de    loudness as the normalised intensity raised to a power of 0.3    _sma- smoothed by a moving average filter with window length 3, _de- 1st order delta coefficient    
+pcm_fftMag_mfcc_sma[0]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[1]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[2]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[3]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[4]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[5]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[6]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[7]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[8]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[9]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[10]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[11]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[12]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[13]    Mel-Frequency cepstral coefficients 0-14
+pcm_fftMag_mfcc_sma[14]    Mel-Frequency cepstral coefficients 0-14
+logMelFreqBand_sma[0]    log power of Mel-frequency 0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[1]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[2]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[3]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[4]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[5]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[6]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+logMelFreqBand_sma[7]    log power of Mel-frequency  0 - 7 (distributed over 0 to 8kHz)    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[0]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[1]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[2]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[3]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[4]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[5]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[6]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+lspFreq_sma[7]    8 line spectral pair frequencies computed from 8 LPC coefficients    _sma- smoothed by a moving average filter with window length 3
+jitterLocal_sma    local (frame-to-frame) Jitter (pitch period length deviations)    _sma- smoothed by a moving average filter with window length 3
+jitterDDP_sma    differential frame-to-frame Jitter (the ‘Jitter of the Jitter’)    _sma- smoothed by a moving average filter with window length 3
+shimmerLocal_sma    local (frame-to-frame) Shimmer (amplitude deviations between pitch periods)    _sma- smoothed by a moving average filter with window length 3
