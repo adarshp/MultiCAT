@@ -11,7 +11,6 @@ from transformers import (
     RobertaForSequenceClassification,
 )
 
-
 class RobertaBase(nn.Module):
     def __init__(self, device):
         super(RobertaBase, self).__init__()

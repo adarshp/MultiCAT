@@ -12,7 +12,11 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_fscore_support
 
-sys.path.append("/home/u18/jmculnan/github/tomcat-dataset-creation")
+#sys.path.append("/home/u18/jmculnan/github/tomcat-dataset-creation")
+
+sys.path.append("/Volumes/ssd/00-ckj-publication/conferences/NAACL2025/MultiCAT/sent_emo")
+
+''''
 from utils.baseline_utils import (
     update_train_state,
     get_all_batches,
@@ -22,7 +26,20 @@ from utils.baseline_utils import (
     combine_modality_data,
     MultitaskObject,
 )
-from baselines.sent_emo.text_only.text_only_model import MultitaskModel, SingleTaskModel
+'''
+
+from baseline_utils import (
+    update_train_state,
+    get_all_batches,
+    make_train_state,
+    set_cuda_and_seeds,
+    plot_train_dev_curve,
+    combine_modality_data,
+    MultitaskObject,
+)
+
+from text_only_model import MultitaskModel, SingleTaskModel
+#from baselines.sent_emo.text_only.text_only_model import MultitaskModel, SingleTaskModel
 
 
 def train_and_predict(
@@ -275,8 +292,11 @@ def load_data(config):
     load_path = config.load_path
 
     # set paths to text and audio data
-    text_base = f"{load_path}/MultiCAT/text_data"
-    ys_base = f"{load_path}/MultiCAT/ys_data"
+    #text_base = f"{load_path}/MultiCAT/text_data"
+    #ys_base = f"{load_path}/MultiCAT/ys_data"
+
+    text_base = f"{load_path}/text_data"
+    ys_base = f"{load_path}/ys_data"
 
     # combine audio, text, and gold label pickle files into a Dataset
     train_text = pickle.load(open(f"{text_base}/train.pickle", "rb"))
@@ -407,7 +427,8 @@ def finetune(dataset, device, output_path, config):
 
 if __name__ == "__main__":
     # import parameters for model
-    import baselines.sent_emo.text_only.text_only_config as config
+    import text_only_config as config
+    #import baselines.sent_emo.text_only.text_only_config as config
 
     device = set_cuda_and_seeds(config)
 
