@@ -21,7 +21,7 @@ from utils.baseline_utils import (
     combine_modality_data,
     MultitaskObject,
 )
-from baselines.sent_emo.multimodal.multimodal_model import MultitaskModel
+from sent_emo.multimodal.multimodal_model import MultitaskModel
 
 
 def train_and_predict(

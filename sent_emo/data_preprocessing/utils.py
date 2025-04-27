@@ -1,7 +1,7 @@
 import torch
 from sklearn.utils import compute_class_weight
 import pandas as pd
-from baselines.sent_emo.data_preprocessing.text_tokenization_utils import *
+from sent_emo.data_preprocessing.text_tokenization_utils import *
 from torchtext.data import get_tokenizer
 from tqdm import tqdm
 import datetime
