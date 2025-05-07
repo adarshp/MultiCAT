@@ -4,7 +4,6 @@ import pandas as pd
 from sent_emo.data_preprocessing.text_tokenization_utils import *
 from torchtext.data import get_tokenizer
 from tqdm import tqdm
-import datetime
 import random
 import math
 
@@ -51,10 +50,10 @@ class SelfSplitPrep:
         self.all_data = pd.read_csv(data_path)
 
         # get dict of all speakers to use
-        all_speakers = set(self.all_data['participant'])
+        all_speakers = set(self.all_data["participant"])
         self.speaker2idx = get_speaker_to_index_dict(all_speakers)
         # drop na's for sent-emo labels
-        self.all_data = self.all_data.dropna(subset=['sentiment', 'emotion'])
+        self.all_data = self.all_data.dropna(subset=["sentiment", "emotion"])
 
         # set tokenizer
         if text_type.lower() == "bert":
@@ -68,8 +67,9 @@ class SelfSplitPrep:
         self.use_bert = True
 
         # get longest utt
-        self.longest_utt = get_longest_utt(self.all_data, self.tokenizer, self.use_bert,
-                                           text_type.lower() == "text")
+        self.longest_utt = get_longest_utt(
+            self.all_data, self.tokenizer, self.use_bert, text_type.lower() == "text"
+        )
 
         # set DataPrep instance for each partition
         self.train_prep = DataPrep(
@@ -81,7 +81,9 @@ class SelfSplitPrep:
 
         del self.all_data
 
-        self.data = self.train_prep.combine_xs_and_ys(self.train_prep.data_tensors, self.speaker2idx)
+        self.data = self.train_prep.combine_xs_and_ys(
+            self.train_prep.data_tensors, self.speaker2idx
+        )
 
     def get_data_folds(self):
         train_data, dev_data, test_data = create_data_folds_list(
@@ -131,8 +133,10 @@ class DataPrep:
                     if type(item) == torch.tensor
                     else item,
                     "x_speaker": speaker2idx[data_tensors["all_speakers"][i]],
-                    "ys": [data_tensors["all_sentiments"][i],
-                           data_tensors["all_emotions"][i]],
+                    "ys": [
+                        data_tensors["all_sentiments"][i],
+                        data_tensors["all_emotions"][i],
+                    ],
                     "audio_id": data_tensors["all_audio_ids"][i],
                     "utt_length": data_tensors["utt_lengths"][i],
                 }
@@ -140,9 +144,7 @@ class DataPrep:
 
         return data
 
-    def make_data_tensors(
-            self, text_data, longest_utt, text_type="distilbert"
-    ):
+    def make_data_tensors(self, text_data, longest_utt, text_type="distilbert"):
         """
         Make the data tensors for asist
         :param text_data: a pandas df containing text and gold
@@ -163,9 +165,16 @@ class DataPrep:
         }
 
         # set class numbers for sent, emo
-        sent2idx = {'positive': 2, 'neutral': 1, 'negative': 0}
-        emo2idx = {'anger': 0, 'disgust': 1, 'fear': 2, 'joy': 3, 'neutral': 4,
-                   'sadness': 5, 'surprise': 6}
+        sent2idx = {"positive": 2, "neutral": 1, "negative": 0}
+        emo2idx = {
+            "anger": 0,
+            "disgust": 1,
+            "fear": 2,
+            "joy": 3,
+            "neutral": 4,
+            "sadness": 5,
+            "surprise": 6,
+        }
 
         if text_type.lower() == "bert":
             emb_maker = BertEmb()
@@ -174,14 +183,16 @@ class DataPrep:
         elif text_type.lower() == "distilbert":
             emb_maker = DistilBertEmb()
 
-        for idx, row in tqdm(text_data.iterrows(), total=len(text_data), desc="Organizing data"):
+        for idx, row in tqdm(
+            text_data.iterrows(), total=len(text_data), desc="Organizing data"
+        ):
             # get audio id
             all_data["all_audio_ids"].append(row["message_id"])
 
             if text_type.lower() == "text":
                 # get values from row
                 # utt = tokenizer(clean_up_word(str(row['utt'])))
-                utt = str(row['utt'])
+                utt = str(row["utt"])
                 all_data["utt_lengths"].append(1)
                 all_data["all_utts"].append(utt)
             else:
@@ -216,6 +227,7 @@ class DataPrep:
 
         # return data
         return all_data
+
 
 def get_speaker_to_index_dict(speaker_set):
     """

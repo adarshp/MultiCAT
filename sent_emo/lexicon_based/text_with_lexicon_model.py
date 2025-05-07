@@ -5,12 +5,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 import nltk
+
 nltk.download("punkt")
 nltk.download("wordnet")
-from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
-from baselines.sent_emo.lexicon_based.exploring_NRC_emotion import load_nrc_emotion_as_dict, get_emo_vec
+from baselines.sent_emo.lexicon_based.exploring_NRC_emotion import (
+    load_nrc_emotion_as_dict,
+    get_emo_vec,
+)
 from baselines.sent_emo.text_only.text_only_model import RobertaBase, PredictionLayer
 
 
