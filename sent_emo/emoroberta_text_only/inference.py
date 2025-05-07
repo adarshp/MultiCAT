@@ -136,7 +136,9 @@ def make_predictions(
         train_state["val_loss"].append(running_loss)
 
         # update the train state now that our epoch is complete
-        train_state = update_train_state(model=classifier, train_state=train_state)
+        train_state = update_train_state(
+            model=classifier, train_state=train_state
+        )
 
         # if it's time to stop, end the training process
         if train_state["stop_early"]:
@@ -325,7 +327,7 @@ def finetune(dataset, device, output_path, config):
     # )
 
     # fixme: set the classifier(s) to the right device
-    # model = model.to(device)
+    #model = model.to(device)
     print(model)
 
     # create a save path and file for the model
@@ -343,9 +345,7 @@ def finetune(dataset, device, output_path, config):
         dataset,
         model_params.batch_size,
         model_params.num_epochs,
-        ["sentiment", "emotion"]
-        if model_params.model.lower() == "multitask"
-        else [model_params.model.lower()],
+        ["sentiment", "emotion"] if model_params.model.lower() == "multitask" else [model_params.model.lower()],
         device,
     )
 
@@ -375,13 +375,11 @@ def finetune(dataset, device, output_path, config):
 
     # return best sent and emo values
     if model_params.model == "sentiment" or model_params.model == "sent":
-        return round(train_state["val_best_f1"][0] * 100, 2), None
+        return round(train_state["val_best_f1"][0]* 100, 2), None
     elif model_params.model == "emotion" or model_params.model == "emo":
-        return None, round(train_state["val_best_f1"][0] * 100, 2)
+        return None, round(train_state["val_best_f1"][0]* 100, 2)
     else:
-        return round(train_state["val_best_f1"][0] * 100, 2), round(
-            train_state["val_best_f1"][1] * 100, 2
-        )
+        return round(train_state["val_best_f1"][0]*100, 2), round(train_state["val_best_f1"][1]*100, 2)
 
 
 if __name__ == "__main__":

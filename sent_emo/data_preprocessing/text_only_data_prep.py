@@ -32,7 +32,9 @@ def save_data_components(
     # save class weights
     pickle.dump(clss_weights, open(f"{save_path}/{dataset}_clsswts.pickle", "wb"))
 
-    all_data = [("train", train_ds), ("dev", dev_ds), ("test", test_ds)]
+    all_data = [('train', train_ds),
+                ('dev', dev_ds),
+                ('test', test_ds)]
 
     for partition_tuple in all_data:
         # get name of partition
@@ -64,9 +66,7 @@ def get_specific_fields(data, field_type, fields=None):
     sub_data = []
     if fields is not None:
         for item in data:
-            sub_data.append(
-                {key: value for key, value in item.items() if key in fields}
-            )
+            sub_data.append({key: value for key, value in item.items() if key in fields})
     else:
         if field_type.lower() == "utt":
             keys = ["x_utt", "utt_length", "audio_id"]
@@ -85,6 +85,7 @@ def prep_data(
     data_path="../../asist_data2/overall_sent-emo.csv",
     embedding_type="distilbert",
 ):
+
     # create instance of StandardPrep class
     asist_prep = SelfSplitPrep(
         data_type="asist",
@@ -96,7 +97,7 @@ def prep_data(
     train_data, dev_data, test_data = asist_prep.get_data_folds()
 
     # get train ys
-    train_ys = [item["ys"] for item in train_data]
+    train_ys = [item['ys'] for item in train_data]
 
     # get updated class weights using train ys
     class_weights = get_updated_class_weights_multicat(train_ys)

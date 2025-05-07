@@ -12,13 +12,11 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_fscore_support
 
-# sys.path.append("/home/u18/jmculnan/github/tomcat-dataset-creation")
+#sys.path.append("/home/u18/jmculnan/github/tomcat-dataset-creation")
 
-sys.path.append(
-    "/Volumes/ssd/00-ckj-publication/conferences/NAACL2025/MultiCAT/sent_emo"
-)
+sys.path.append("/Volumes/ssd/00-ckj-publication/conferences/NAACL2025/MultiCAT/sent_emo")
 
-"""'
+''''
 from utils.baseline_utils import (
     update_train_state,
     get_all_batches,
@@ -28,7 +26,7 @@ from utils.baseline_utils import (
     combine_modality_data,
     MultitaskObject,
 )
-"""
+'''
 
 from baseline_utils import (
     update_train_state,
@@ -41,7 +39,7 @@ from baseline_utils import (
 )
 
 from text_only_model import MultitaskModel, SingleTaskModel
-# from baselines.sent_emo.text_only.text_only_model import MultitaskModel, SingleTaskModel
+#from baselines.sent_emo.text_only.text_only_model import MultitaskModel, SingleTaskModel
 
 
 def train_and_predict(
@@ -237,6 +235,7 @@ def run_model(
         if len(tasks) != 2:
             batch_pred = [batch_pred]
 
+
         # calculate loss for each task
         for task, preds in enumerate(batch_pred):
             loss = dataset.loss_fx(preds.to(device), y_gold[task].to(device))
@@ -293,8 +292,8 @@ def load_data(config):
     load_path = config.load_path
 
     # set paths to text and audio data
-    # text_base = f"{load_path}/MultiCAT/text_data"
-    # ys_base = f"{load_path}/MultiCAT/ys_data"
+    #text_base = f"{load_path}/MultiCAT/text_data"
+    #ys_base = f"{load_path}/MultiCAT/ys_data"
 
     text_base = f"{load_path}/text_data"
     ys_base = f"{load_path}/ys_data"
@@ -389,9 +388,7 @@ def finetune(dataset, device, output_path, config):
         model_params.batch_size,
         model_params.num_epochs,
         optimizer,
-        ["sentiment", "emotion"]
-        if model_params.model.lower() == "multitask"
-        else [model_params.model.lower()],
+        ["sentiment", "emotion"] if model_params.model.lower() == "multitask" else [model_params.model.lower()],
         device,
     )
 
@@ -421,19 +418,17 @@ def finetune(dataset, device, output_path, config):
 
     # return best sent and emo values
     if model_params.model == "sentiment" or model_params.model == "sent":
-        return round(train_state["val_best_f1"][0] * 100, 2), None
+        return round(train_state["val_best_f1"][0]* 100, 2), None
     elif model_params.model == "emotion" or model_params.model == "emo":
-        return None, round(train_state["val_best_f1"][0] * 100, 2)
+        return None, round(train_state["val_best_f1"][0]* 100, 2)
     else:
-        return round(train_state["val_best_f1"][0] * 100, 2), round(
-            train_state["val_best_f1"][1] * 100, 2
-        )
+        return round(train_state["val_best_f1"][0]*100, 2), round(train_state["val_best_f1"][1]*100, 2)
 
 
 if __name__ == "__main__":
     # import parameters for model
     import text_only_config as config
-    # import baselines.sent_emo.text_only.text_only_config as config
+    #import baselines.sent_emo.text_only.text_only_config as config
 
     device = set_cuda_and_seeds(config)
 

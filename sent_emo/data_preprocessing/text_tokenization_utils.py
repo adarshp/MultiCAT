@@ -1,13 +1,6 @@
 import torch
 from torch import nn
-from transformers import (
-    BertTokenizer,
-    BertModel,
-    DistilBertModel,
-    DistilBertTokenizer,
-    RobertaTokenizer,
-    RobertaModel,
-)
+from transformers import BertTokenizer, BertModel, DistilBertModel, DistilBertTokenizer, RobertaTokenizer, RobertaModel
 
 
 class BertEmb:
@@ -24,8 +17,7 @@ class BertEmb:
         # Load pre-trained model (weights)
         if not use_roberta:
             self.model = BertModel.from_pretrained(
-                "bert-base-uncased",
-                output_hidden_states=True,
+                "bert-base-uncased", output_hidden_states=True,
             )
         else:
             self.model = RobertaModel.from_pretrained(
@@ -109,8 +101,7 @@ class DistilBertEmb:
 
         # Load pre-trained model (weights)
         self.model = DistilBertModel.from_pretrained(
-            "distilbert-base-uncased",
-            output_hidden_states=True,
+            "distilbert-base-uncased", output_hidden_states=True,
         )
         self.model.eval()
 

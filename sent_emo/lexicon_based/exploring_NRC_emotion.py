@@ -71,18 +71,17 @@ def load_nrc_emotion_as_dict(nrc_load_path):
     # positive, negative
     # we care about most of these, and the other two MAY be interesting
     # so let's include them all for now
-    emo2idx = {
-        "anger": 0,
-        "anticipation": 1,
-        "disgust": 2,
-        "fear": 3,
-        "joy": 4,
-        "sadness": 5,
-        "surprise": 6,
-        "trust": 7,
-        "positive": 8,
-        "negative": 9,
-    }
+    emo2idx = {"anger": 0,
+               "anticipation": 1,
+               "disgust": 2,
+               "fear": 3,
+               "joy": 4,
+               "sadness": 5,
+               "surprise": 6,
+               "trust": 7,
+               "positive": 8,
+               "negative": 9
+               }
 
     # get dict for emotions
     emo_wd_dict = {}
