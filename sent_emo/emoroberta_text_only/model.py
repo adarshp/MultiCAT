@@ -7,7 +7,7 @@ from transformers import (
     RobertaTokenizer,
     RobertaModel,
     TFRobertaForSequenceClassification,
-    pipeline
+    pipeline,
 )
 
 
@@ -18,10 +18,11 @@ class EmoRoBERTa(nn.Module):
         self.device = device
 
         self.tokenizer = RobertaTokenizerFast.from_pretrained("arpanghoshal/EmoRoBERTa")
-        self.model = TFRobertaForSequenceClassification.from_pretrained("arpanghoshal/EmoRoBERTa")
+        self.model = TFRobertaForSequenceClassification.from_pretrained(
+            "arpanghoshal/EmoRoBERTa"
+        )
 
-        self.emotion = pipeline('sentiment-analysis',
-                                model='arpanghoshal/EmoRoBERTa')
+        self.emotion = pipeline("sentiment-analysis", model="arpanghoshal/EmoRoBERTa")
 
     def forward(self, text_inputs):
         all_inputs = []

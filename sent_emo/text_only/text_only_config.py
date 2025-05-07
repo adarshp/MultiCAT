@@ -30,8 +30,10 @@ if USE_SERVER:
     # load_path = "/data/nlp/corpora/MM/pickled_data/distilbert_custom_feats"
     load_path = "/xdisk/bethard/jmculnan"
 else:
-    #load_path = "data"
-    load_path = "/Volumes/ssd/00-ckj-publication/conferences/NAACL2025/MultiCAT/sent_emo/data"
+    # load_path = "data"
+    load_path = (
+        "/Volumes/ssd/00-ckj-publication/conferences/NAACL2025/MultiCAT/sent_emo/data"
+    )
 
 # set directory to save full experiments
 exp_save_path = "output/text_only"
