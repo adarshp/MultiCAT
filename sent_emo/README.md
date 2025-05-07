@@ -76,21 +76,14 @@ output/text_only/
         
 ### 3. Hyperparameter Tuning
 
-For automated hyperparameter optimization:
+For hyperparameter optimization:
 
 ```bash
-# For grid search
-python grid_search.py
-
-# For random search
-python random_search.py
+python grid_search.py   # Grid search
+python random_search.py # Random search
 ```
 
-The hyperparameter search configurations can be modified in:
-- `grid_config.py`: Defines parameter grid for exhaustive search
-- `random_config.py`: Defines parameter ranges for random search
-
-Results from hyperparameter tuning will be saved in the `output/` directory, including a CSV file with performance metrics for each parameter combination tested.
+Configuration files: `grid_config.py` and `random_config.py`. Results are saved to the `output/` directory, including a CSV file with performance metrics for each parameter combination tested.
 
 ## Citation
 
