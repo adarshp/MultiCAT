@@ -19,7 +19,6 @@ from utils.baseline_utils import (
     set_cuda_and_seeds,
     plot_train_dev_curve,
     combine_modality_data,
-    DataIngester,
     MultitaskObject,
 )
 from baselines.sent_emo.lexicon_based.text_with_lexicon_model import MultitaskModel
