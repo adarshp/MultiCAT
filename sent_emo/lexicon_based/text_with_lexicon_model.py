@@ -8,7 +8,6 @@ import nltk
 
 nltk.download("punkt")
 nltk.download("wordnet")
-from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
 from baselines.sent_emo.lexicon_based.exploring_NRC_emotion import (
