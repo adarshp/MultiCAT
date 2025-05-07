@@ -1,0 +1,151 @@
+# Metadata for the Datasette instance.
+
+title: "MultiCAT: Multimodal Communication Annotations for Teams"
+description: Multimodal task-oriented dialog dataset.
+license: CC-BY-4.0
+license_url: https://creativecommons.org/licenses/by/4.0/
+databases:
+    multicat:
+        tables:
+            participant:
+                description: Participant
+                label_column: id
+                columns:
+                    id: Participant ID
+                    team: The ID of the team that the participant was in.
+                    playername: The 'playername' assigned to the participant.
+                    age: Age of the participant
+                    sex: Sex of the participant assigned at birth
+                    ethnicity: Ethnicity of the participant
+                    english_proficiency: English proficiency level
+                    time_in_us: Time that the participant has lived in the US
+                    highest_education_level: Highest education level achieved by the participant.
+                    mc_prof_1: >
+                      To what extent do you consider yourself to be a serious, competitive gamer? 
+                      [Here we define "serious, competitive" as actively
+                      training for and participating in competitive gameplay
+                      more than a few times a year. Note that competitions may
+                      take different forms depending on which game you play
+                      competitively, some may be solo play, some may be teams of
+                      players against teams of other players, some may be
+                      structured as tournaments, but any competitive play that
+                      results in identifiable winners and involves scheduled
+                      and/or regular dedicated training or practice time is
+                      appropriate to consider.]
+                    mc_prof_2_1: >
+                      Self-reported confidence for learning and succeeding at a
+                      new video game or set of game-related skills after minimal
+                      practice
+                    mc_prof_3: >
+                      Preferred control systems for playing video games.
+                    mc_prof_4_1: >
+                      Self-reported level of mastery in
+                      learning the layout of a new virtual environment
+                    mc_prof_4_2: >
+                      Self-reported level of mastery in communicating their current
+                      location in a virtual environment to members of a team
+                    mc_prof_4_3: >
+                      Self-reported level of mastery in coordinating with teammates
+                      to optimize tasks
+                    mc_prof_4_4: >
+                      Self-reported level of mastery in
+                      maintaining an awareness of game/task parameters (e.g., time limits,
+                      goals, etc )
+                    mc_prof_4_5: >
+                      Self-reported level of mastery in
+                      Learning the purposes of novel items, tools, or objects
+                    mc_prof_4_6: >
+                      Self-reported level of mastery in
+                      remembering which places they have visited  in a virtual environment
+                    mc_prof_4_7: >
+                      Self-reported level of mastery in
+                      controlling the movement of an avatar using the W, A, S, and D keys + mouse control
+                    mc_prof_4_8: >
+                      Self-reported level of mastery in
+                      keeping track of where they are in a virtual environment
+                    mc_prof_5: >
+                      Self-reported motivation for playing video games.
+                    mc_prof_6: >
+                      Self-reported experience level in playing video games.
+                    mc_prof_7: >
+                      Self-reported proficiency level in playing video games.
+                    mc_prof_8_1: >
+                      How regularly the participant uses a computer.
+                    mc_prof_8_2: >
+                      How regularly the participant plays any video game.
+                    mc_prof_8_3: >
+                      How regularly the participant uses a computer to play video games.
+                    mc_prof_8_4: >
+                      How regularly the participant uses a system other than a computer to play video games.
+                    mc_prof_8_5: >
+                      How regularly the participant plays video games which require participation in a team.
+                    mc_prof_8_6: >
+                      How regularly the participant plays Minecraft.
+                    mc_prof_9_1: >
+                      Number of years using a computer for any purpose
+                    mc_prof_9_2: >
+                      Number of years using a computer to play video games
+                    mc_prof_9_3: >
+                      Number of years using a system other than a computer to
+                      play video games (e.g., mobile phone, gaming console,
+                      arcade console)
+                    mc_prof_9_4: >
+                      Number of years playing Minecraft (any versions or styles of play)
+
+            team:
+                description: Team
+                label_column: id
+                columns:
+                    id: Team ID
+                    advisor: Advisor
+            trial:
+                description: Trial
+                label_column: id
+                columns:
+                    id: Trial ID
+                    team: Team ID
+            utterance:
+                description: Utterances with their annotations.
+                columns:
+                    original_uuid: >
+                      Original UUID of the ASR utterance. This can be null if
+                      the utterance was manually added by an annotator.
+                    trial: Trial ID
+                    participant: Participant ID
+                    asr_text: ASR transcription
+                    corrected_text: Manually corrected transcription, if the ASR transcription is incorrect.
+                    start_timestamp: Start timestamp
+                    stop_timestamp: Stop timestamp
+                    dialog_acts: Dialog acts identified.
+                    adjacency_pairs: Adjacency pair annotations.
+                    sentiment: >
+                      Sentiment label. Can be null if (i) the trial wasn't
+                      annotated for sent/emo or (ii) if the audio of the
+                      utterance is not clear enough to assign a label.
+                    emotion: >
+                      Emotion label. Can be null if (i) the trial wasn't
+                      annotated for sent/emo or (ii) if the audio of the
+                      utterance is not clear enough to assign a label.
+                    background_noise: >
+                      Annotations describing background noise during an utterance, if any.
+
+# ====================
+# Plugin configuration
+# ====================
+
+plugins:
+  datasette-render-markdown:
+    templates: true
+
+
+# ====================
+# Custom CSS
+# ====================
+extra_css_urls:
+    - url: https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css
+      sri: sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM
+    - /assets/app.css
+
+extra_js_urls:
+    - url: https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js
+      sri: sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz
