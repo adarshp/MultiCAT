@@ -4,6 +4,7 @@ services:
 
   datasette:
     image: datasette-with-plugins
+    container_name: multicat
     restart: unless-stopped
     ports:
         - "8001:8001"
