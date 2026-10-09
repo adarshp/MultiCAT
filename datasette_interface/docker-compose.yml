@@ -6,6 +6,14 @@ services:
     image: datasette-with-plugins
     container_name: multicat
     restart: unless-stopped
+    # Cap memory so a runaway worker cannot starve starfish's other services
+    # (a 2026-10-08 scrape flood took it to 3.5 GB of the host's 7.7 GB).
+    # On hitting the cap the kernel kills datasette, the container exits and
+    # restart: unless-stopped brings it back. That only works because
+    # --reload is gone: with it, hupper's supervisor survived a dead worker
+    # and waited for a file change, leaving the site down but the container
+    # "Up".
+    mem_limit: 1g
     logging:
         driver: json-file
         options:
@@ -18,7 +26,6 @@ services:
 
     entrypoint: |
         datasette -p 8001 -h 0.0.0.0 -i /mnt/multicat.db
-        --reload
         --metadata /mnt/metadata.yml
         --static assets:/mnt/static
         --template-dir /mnt/templates
