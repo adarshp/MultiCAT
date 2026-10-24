@@ -3,6 +3,7 @@
 services:
 
   datasette:
+    build: .
     image: datasette-with-plugins
     container_name: multicat
     restart: unless-stopped

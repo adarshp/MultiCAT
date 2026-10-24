@@ -7,18 +7,16 @@ for the MultiCAT database.
 If you want to run the UI locally, you can do the following (assuming you have
 [Docker](https://www.docker.com/) installed):
 
-1. Create the `datasette-with-plugins` Docker image by running
-
-  ./create_datasette_with_plugins_image
-
-2. Run `docker compose up` from this directory
+1. Run `docker compose up --build` from this directory. It builds the
+   `datasette-with-plugins` image from the `Dockerfile` the first time.
 
 You can then navigate to `localhost:8001` in your browser to view the UI.
 
 
 This directory contains the following:
 
-- The `docker-compose.yml` file specifies the base image, port mapping, volumes,
+- The `Dockerfile` pins the Datasette image and the plugins installed on it.
+- The `docker-compose.yml` file specifies the image, port mapping, volumes,
   and entrypoint command for the UI.
 - The `metadata.yml` file contains metadata about the tables and columns in YAML
   format.
